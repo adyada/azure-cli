@@ -17,7 +17,7 @@ root_dir = os.path.abspath(os.path.join(os.path.abspath(__file__), '..', '..'))
 def py_command(command):
     try:
         print('Executing: python ' + command)
-        check_call([sys.executable] + command.split(), cwd=root_dir)
+        check_call(["python3"] + command.split(), cwd=root_dir)
         print()
     except CalledProcessError as err:
         print(err, file=sys.stderr)
