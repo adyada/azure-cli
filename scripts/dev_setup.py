@@ -17,21 +17,14 @@ root_dir = os.path.abspath(os.path.join(os.path.abspath(__file__), '..', '..'))
 def py_command(command):
     try:
         print('Executing: python ' + command)
-        check_call(["python3"] + command.split(), cwd=root_dir)
+        check_call([sys.executable] + command.split(), cwd=root_dir)
         print()
     except CalledProcessError as err:
         print(err, file=sys.stderr)
         sys.exit(1)
 
 def pip_command(command):
-    try:
-        print('Executing: pip3 ' + command)
-        check_call(["sudo", "pip3"] + command.split(), cwd=root_dir)
-        print()
-    except CalledProcessError as err:
-        print(err, file=sys.stderr)
-        sys.exit(1)
-    # py_command('-m pip ' + command)
+    py_command('-m pip ' + command)
 
 print('Running dev setup...')
 print('Root directory \'{}\'\n'.format(root_dir))
