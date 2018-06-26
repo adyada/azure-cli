@@ -24,7 +24,14 @@ def py_command(command):
         sys.exit(1)
 
 def pip_command(command):
-    py_command('-m pip ' + command)
+    try:
+        print('Executing: pip3 ' + command)
+        check_call(["sudo", "pip3"] + command.split(), cwd=root_dir)
+        print()
+    except CalledProcessError as err:
+        print(err, file=sys.stderr)
+        sys.exit(1)
+    # py_command('-m pip ' + command)
 
 print('Running dev setup...')
 print('Root directory \'{}\'\n'.format(root_dir))
